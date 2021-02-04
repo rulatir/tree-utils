@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+require __DIR__."/../vendor/autoload.php";
+
+function parse_cmd(array $argv) : array
+{
+    array_shift($argv);
+    $repositoryRoot = array_shift($argv);
+    $statefile = array_shift($argv);
+    $paths = parse_paths($argv);
+    return [$repositoryRoot, $statefile, $paths];
+}
+
+function parse_paths(array $argv) : array
+{
+    $result = [];
+    while(count($argv)) {
+
+        $path = trim(array_shift($argv));
+        $result[] = '-n' === $path ? [array_shift($argv),true] : [$path,false];
+    }
+    return array_reverse($result);
+}
+
+function tree_fp(string $repositoryRoot, $statefile, array $rules)
+{
+    $fingerprint = new \Rulatir\Tree\Fingerprint($repositoryRoot, $repositoryRoot);
+    foreach ($rules as $rule) {
+        $fingerprint->addRule(...$rule);
+    }
+    echo md5(json_encode($fingerprint->getFingerprint(),JSON_PRETTY_PRINT));
+}
+
+tree_fp(...parse_cmd($argv));

@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+require __DIR__."/../vendor/autoload.php";
+
+use Rulatir\Tree\State;
+
+$repositoryRoot = rtrim($argv[1], "/\\");
+$baseCommitRef = file_exists("{$repositoryRoot}/.tree-state.ref") ? trim(`cat .tree-state.ref`) : 'HEAD';
+$state = new State($repositoryRoot, $baseCommitRef);
+$snapshot = $state->getSnapshot();
+echo json_encode($snapshot, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);

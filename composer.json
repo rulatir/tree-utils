@@ -1,0 +1,20 @@
+{
+    "name": "rulatir/tree-utils",
+    "description": "Build system helpers for delegating change detection to git",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Szczepan Hołyszewski",
+            "email": "rulatir@wp.pl"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "webmozart/glob": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rulatir\\": "src/"
+        }
+    }
+}

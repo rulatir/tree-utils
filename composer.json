@@ -16,5 +16,12 @@
         "psr-4": {
             "Rulatir\\": "src/"
         }
+    },
+    "bin": [
+        "bin/tree-state",
+        "bin/tree-fp"
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }

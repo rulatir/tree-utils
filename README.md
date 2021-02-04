@@ -1,8 +1,8 @@
 # tree-utils
 
-This directory contains helper scripts used in build system commands. They provide the ability to
-create surrogate build goals that change whenever any file in a large set of files changes. They
-utilize `git` to speed up change detection.
+This project provides two helper scripts that can be used in build system commands. They provide
+the ability to create surrogate artifacts that track changes in large sets of files. They utilize
+`git` to speed up change detection.
 
 #### `tree-state`
 
@@ -12,7 +12,7 @@ tree-state path/to/repository/root
 
 The `tree-state` script uses `git` to generate a compressed identity of the tree state. Abstractly,
 the state of the tracked subset of the tree is fully (if somewhat redundantly) identified by
-the combination of the following bits of information:
+the combination of the following pieces of information:
 - current HEAD commit hash (output of `git rev-parse HEAD`)
 - changes and deletions (output of `git diff HEAD --name-status`), together with hashes of the files
 listed

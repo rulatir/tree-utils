@@ -4,28 +4,26 @@
 namespace Rulatir\Tree;
 
 
-use Rulatir\Tree\Traits\HasGitRepository;
+use Rulatir\Tree\Contracts\GitRepositoryInterface;
 
 final class State
 {
-    use HasGitRepository;
-    
+    private GitRepositoryInterface $repository;
     private string $baseCommitRef;
     private ?string $baseCommit;
     private ?array $snapshot = null;
 
-    public function __construct(string $repositoryRoot, string $baseCommitRef)
+    public function __construct(GitRepositoryInterface $repository, string $baseCommitRef)
     {
-        $this->constructHasGitRepository($repositoryRoot);
+        $this->repository = $repository;
         $this->baseCommitRef = $baseCommitRef;
         $this->baseCommit = null;
     }
 
     public function capture() : array
     {
-        $this->assertRepositoryRoot(__METHOD__);
-        $changes = $this->captureChanges();
-        $descriptors = $this->stampChanges($changes);
+        $changes = $this->repository->getChanges($this->getBaseCommit());
+        $descriptors = $this->repository->inRepositoryRoot([$this, 'stampChanges'], $changes);
         return [
             'commit' => $this->getBaseCommit(),
             'files' => $descriptors

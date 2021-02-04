@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9494e22723d6fbfbaa15d3cd5ff879ee",
+    "content-hash": "310e6821491e594ce69990e3270a6f1f",
     "packages": [
         {
             "name": "symfony/polyfill-ctype",
@@ -241,6 +241,124 @@
     ],
     "packages-dev": [
         {
+            "name": "cpliakas/git-wrapper",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cpliakas/git-wrapper.git",
+                "reference": "c2c874237039200659f28d589a8d92a9b0867003"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cpliakas/git-wrapper/zipball/c2c874237039200659f28d589a8d92a9b0867003",
+                "reference": "c2c874237039200659f28d589a8d92a9b0867003",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.0",
+                "php": ">=7.3",
+                "symfony/event-dispatcher": "^4.4|^5.1",
+                "symfony/process": "^4.4|^5.1"
+            },
+            "require-dev": {
+                "ondram/ci-detector": "^3.5",
+                "phpstan/phpstan": "^0.12.64",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpunit/phpunit": "^9.5",
+                "psr/log": "^1.1",
+                "rector/rector": "^0.9",
+                "symfony/filesystem": "^4.4|^5.1",
+                "symplify/changelog-linker": "^9.0",
+                "symplify/easy-coding-standard": "^9.0",
+                "symplify/phpstan-extensions": "^9.0",
+                "symplify/phpstan-rules": "^9.0",
+                "tracy/tracy": "^2.7"
+            },
+            "suggest": {
+                "monolog/monolog": "Enables logging of executed git commands"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GitWrapper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Pliakas",
+                    "email": "opensource@chrispliakas.com"
+                },
+                {
+                    "name": "Tomas Votruba",
+                    "email": "tomas.vot@gmail.com"
+                }
+            ],
+            "description": "A PHP wrapper around the Git command line utility.",
+            "keywords": [
+                "cli",
+                "git",
+                "git wrapper"
+            ],
+            "support": {
+                "issues": "https://github.com/cpliakas/git-wrapper/issues",
+                "source": "https://github.com/cpliakas/git-wrapper/tree/3.1.0"
+            },
+            "time": "2021-01-03T12:20:31+00:00"
+        },
+        {
+            "name": "derhasi/tempdirectory",
+            "version": "0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/derhasi/tempdirectory.git",
+                "reference": "3eb9783678812656f80771bbc198bfcbc476df19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/derhasi/tempdirectory/zipball/3eb9783678812656f80771bbc198bfcbc476df19",
+                "reference": "3eb9783678812656f80771bbc198bfcbc476df19",
+                "shasum": ""
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "derhasi\\tempdirectory\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes Haseitl",
+                    "email": "johannes@undpaul.de",
+                    "homepage": "http://www.undpaul.de"
+                }
+            ],
+            "description": "Provides a representation of a temp directory that will destroy itself.",
+            "homepage": "https://github.com/derhasi/tempdirectory",
+            "keywords": [
+                "filesystem",
+                "phpunit",
+                "temporary",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/derhasi/tempdirectory/issues",
+                "source": "https://github.com/derhasi/tempdirectory/tree/master"
+            },
+            "time": "2017-02-03T10:01:57+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.4.0",
             "source": {
@@ -366,6 +484,91 @@
                 }
             ],
             "time": "2020-11-13T09:40:50+00:00"
+        },
+        {
+            "name": "nette/utils",
+            "version": "v3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/utils.git",
+                "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/utils/zipball/2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
+                "reference": "2bc2f58079c920c2ecbb6935645abf6f2f5f94ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2 <8.1"
+            },
+            "conflict": {
+                "nette/di": "<3.0.6"
+            },
+            "require-dev": {
+                "nette/tester": "~2.0",
+                "phpstan/phpstan": "^0.12",
+                "tracy/tracy": "^2.3"
+            },
+            "suggest": {
+                "ext-gd": "to use Image",
+                "ext-iconv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
+                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
+                "ext-json": "to use Nette\\Utils\\Json",
+                "ext-mbstring": "to use Strings::lower() etc...",
+                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
+                "ext-xml": "to use Strings::length() etc. when mbstring is not available"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "array",
+                "core",
+                "datetime",
+                "images",
+                "json",
+                "nette",
+                "paginator",
+                "password",
+                "slugify",
+                "string",
+                "unicode",
+                "utf-8",
+                "utility",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/utils/issues",
+                "source": "https://github.com/nette/utils/tree/v3.2.1"
+            },
+            "time": "2021-01-11T03:05:59+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1179,6 +1382,56 @@
                 }
             ],
             "time": "2021-02-02T14:45:58+00:00"
+        },
+        {
+            "name": "psr/event-dispatcher",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/event-dispatcher.git",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\EventDispatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Standard interfaces for event handling.",
+            "keywords": [
+                "events",
+                "psr",
+                "psr-14"
+            ],
+            "support": {
+                "issues": "https://github.com/php-fig/event-dispatcher/issues",
+                "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
+            },
+            "time": "2019-01-08T18:20:26+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2143,6 +2396,444 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "symfony/deprecation-contracts",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/deprecation-contracts.git",
+                "reference": "5fa56b4074d1ae755beb55617ddafe6f5d78f665"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/5fa56b4074d1ae755beb55617ddafe6f5d78f665",
+                "reference": "5fa56b4074d1ae755beb55617ddafe6f5d78f665",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "function.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A generic function and convention to trigger deprecation notices",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/deprecation-contracts/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-09-07T11:33:47+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "4f9760f8074978ad82e2ce854dff79a71fe45367"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/4f9760f8074978ad82e2ce854dff79a71fe45367",
+                "reference": "4f9760f8074978ad82e2ce854dff79a71fe45367",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/event-dispatcher-contracts": "^2",
+                "symfony/polyfill-php80": "^1.15"
+            },
+            "conflict": {
+                "symfony/dependency-injection": "<4.4"
+            },
+            "provide": {
+                "psr/event-dispatcher-implementation": "1.0",
+                "symfony/event-dispatcher-implementation": "2.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "^4.4|^5.0",
+                "symfony/dependency-injection": "^4.4|^5.0",
+                "symfony/error-handler": "^4.4|^5.0",
+                "symfony/expression-language": "^4.4|^5.0",
+                "symfony/http-foundation": "^4.4|^5.0",
+                "symfony/service-contracts": "^1.1|^2",
+                "symfony/stopwatch": "^4.4|^5.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T10:36:42+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher-contracts",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                "reference": "0ba7d54483095a198fa51781bc608d17e84dffa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/0ba7d54483095a198fa51781bc608d17e84dffa2",
+                "reference": "0ba7d54483095a198fa51781bc608d17e84dffa2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "psr/event-dispatcher": "^1"
+            },
+            "suggest": {
+                "symfony/event-dispatcher-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\EventDispatcher\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to dispatching event",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-09-07T11:33:47+00:00"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/262d033b57c73e8b59cd6e68a45c528318b15038",
+                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides basic utilities for the filesystem",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/filesystem/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T10:01:46+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php80",
+            "version": "v1.22.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php80.git",
+                "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/dc3063ba22c2a1fd2f45ed856374d79114998f91",
+                "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.22-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.22.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-07T16:49:33+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "313a38f09c77fbcdc1d223e57d368cea76a2fd2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/313a38f09c77fbcdc1d223e57d368cea76a2fd2f",
+                "reference": "313a38f09c77fbcdc1d223e57d368cea76a2fd2f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-php80": "^1.15"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Executes commands in sub-processes",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/process/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T10:15:41+00:00"
         },
         {
             "name": "theseer/tokenizer",

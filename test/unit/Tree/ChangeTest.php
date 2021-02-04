@@ -44,7 +44,7 @@ class ChangeTest extends TestCase
      * @param array $expectedPaths
      * @param array $expectedOtherPaths
      * @dataProvider lines
-     * @covers Change::fromChangeLine()
+     * @covers \Rulatir\Tree\Change::fromChangeLine
      */
     public function testFromChangeLine(
         string $changeLine,
@@ -79,7 +79,7 @@ class ChangeTest extends TestCase
     /**
      * @param string $invalidLine
      * @dataProvider invalidLines
-     * @covers Change::fromChangeLine()
+     * @covers \Rulatir\Tree\Change::fromChangeLine
      */
     public function testFromInvalidChangeLine(string $invalidLine)
     {
@@ -88,7 +88,7 @@ class ChangeTest extends TestCase
     }
 
     /**
-     * @covers Change::fromChangeLines()
+     * @covers \Rulatir\Tree\Change::fromChangeLines
      */
     public function testFromChangeLines()
     {
@@ -130,9 +130,15 @@ class ChangeTest extends TestCase
         );
     }
 
+    /**
+     * @covers Change::changeToArray()
+     */
     public function testChangeToArray()
     {
-        [$from, $to] = Change::fromChangeLine("R foo/bar.txt\tbaz/mek.txt");
+        [$from, $to] = [
+            new Change(Change::STATUS_RENAMED_FROM, 'foo/bar.txt', 'baz/mek.txt'),
+            new Change(Change::STATUS_RENAMED_TO, 'baz/mek.txt', 'foo/bar.txt')
+        ];
         $arrayFrom = Change::changeToArray($from);
         $this->assertEquals(Change::STATUS_RENAMED_FROM, $arrayFrom['status']);
         $this->assertEquals('foo/bar.txt', $arrayFrom['path']);
@@ -161,10 +167,11 @@ class ChangeTest extends TestCase
     }
 
     /**
-     * @dataProvider compare
      * @param int $expected
      * @param string $lhsLine
      * @param string $rhsLine
+     * @dataProvider compare
+     * @covers \Rulatir\Tree\Change::compare()
      */
     public function testCompare(int $expected, string $lhsLine, string $rhsLine)
     {
@@ -173,9 +180,15 @@ class ChangeTest extends TestCase
         self::assertEquals($expected, Change::compare($lhs, $rhs));
     }
 
+    /**
+     * @covers \Rulatir\Tree\Change::toArray()
+     */
     public function testToArray()
     {
-        [$from, $to] = Change::fromChangeLine("R foo/bar.txt\tbaz/mek.txt");
+        [$from, $to] = [
+            new Change(Change::STATUS_RENAMED_FROM, 'foo/bar.txt', 'baz/mek.txt'),
+            new Change(Change::STATUS_RENAMED_TO, 'baz/mek.txt', 'foo/bar.txt')
+        ];
         $arrayFrom = $from->toArray();
         $this->assertEquals(Change::STATUS_RENAMED_FROM, $arrayFrom['status']);
         $this->assertEquals('foo/bar.txt', $arrayFrom['path']);

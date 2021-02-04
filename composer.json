@@ -19,13 +19,11 @@
     },
     "autoload-dev": {
         "classmap": [
-            "test/unit",
-            "test/stories"
+            "test/unit"
         ],
         "psr-4": {
             "Rulatir\\": [
-                "test/unit/",
-                "test/stories/"
+                "test/unit/"
             ]
         }
     },

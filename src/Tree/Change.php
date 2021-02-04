@@ -4,6 +4,7 @@
 namespace Rulatir\Tree;
 
 
+use InvalidArgumentException;
 use RuntimeException;
 
 final class Change
@@ -31,13 +32,22 @@ final class Change
      */
     public static function fromChangeLine(string $changeLine) : array
     {
-        if (!preg_match('/^(\S+)\s+(.*)$/',$changeLine,$matches)) return [];
+        if (!preg_match('/^(\S+)\s+(.+)$/',$changeLine, $matches)) {
+            throw new InvalidArgumentException("Invalid change line \"{$changeLine}\"");
+        };
         [$status, $path] = array_slice($matches, 1);
+        if (strlen($status) > 2) {
+            throw new InvalidArgumentException("Invalid change status field in change line \"{$changeLine}\"");
+        }
         switch($status[0]) {
             case "M": return [new self(self::STATUS_MODIFIED, $path)];
             case "D": return [new self(self::STATUS_DELETED, $path)];
             case "R":
-                [$from, $to] = explode("\t", $path);
+                $names = explode("\t", $path);
+                if (2 !== count($names)) {
+                    throw new InvalidArgumentException("Invalid rename line \"{$changeLine}\"; to and from must be separated by a tab character and there must be exactly two items");
+                }
+                [$from, $to] = $names;
                 return [
                     new self(self::STATUS_RENAMED_FROM, $from, $to),
                     new self(self::STATUS_RENAMED_TO, $to, $from)
@@ -45,7 +55,9 @@ final class Change
             case "A":
                 return [new self(self::STATUS_ADDED, $path)];
             default:
-                throw new RuntimeException("Unknown change status \"{$status}\"");
+                throw new InvalidArgumentException(
+                    "Unknown change status \"{$status}\" in change line \"{$changeLine}\""
+                );
         }
     }
 

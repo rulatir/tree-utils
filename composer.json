@@ -17,6 +17,18 @@
             "Rulatir\\": "src/"
         }
     },
+    "autoload-dev": {
+        "classmap": [
+            "test/unit",
+            "test/stories"
+        ],
+        "psr-4": {
+            "Rulatir\\": [
+                "test/unit/",
+                "test/stories/"
+            ]
+        }
+    },
     "bin": [
         "bin/tree-state",
         "bin/tree-fp"

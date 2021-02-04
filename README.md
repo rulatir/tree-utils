@@ -1,4 +1,4 @@
-# /scripts/make-helpers
+# tree-utils
 
 This directory contains helper scripts used in build system commands. They provide the ability to
 create surrogate build goals that change whenever any file in a large set of files changes. They
@@ -31,7 +31,7 @@ might use it.
 tree-fp path/to/repository/root path/to/statefile 'glob' [[-n] 'glob'] ...
 ```
 
-The `tree-fp` is used to generate a fingerprint hash of changes in a subset of the tree.
+The `tree-fp` script is used to generate a fingerprint hash of changes in a subset of the tree.
 It reads the state file generated with `tree-state`, filters the list of changes according to
 glob rules, and outputs a hash of the filtered state (including the HEAD commit).
 The filter is specified using glob expressions relative to the repository root. Precede an

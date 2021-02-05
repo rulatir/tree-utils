@@ -4,7 +4,7 @@
 use Rulatir\Tree\Fingerprint;
 use Rulatir\Tree\GlobFilter;
 
-require __DIR__."/../vendor/autoload.php";
+require realpath(__DIR__)."/../vendor/autoload.php";
 
 function parse_cmd(array $argv) : array
 {

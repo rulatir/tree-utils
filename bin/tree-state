@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-$root = realpath(__DIR__."/..");
+$root = dirname($_SERVER['PHP_SELF'])."/..";
 require "{$root}/vendor/autoload.php";
 
 use Rulatir\Tree\State;

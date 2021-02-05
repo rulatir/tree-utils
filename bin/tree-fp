@@ -1,10 +1,10 @@
 #!/usr/bin/env php
 <?php
+$root = realpath(__DIR__."/..");
+require "{$root}/vendor/autoload.php";
 
 use Rulatir\Tree\Fingerprint;
 use Rulatir\Tree\GlobFilter;
-
-require realpath(__DIR__)."/../vendor/autoload.php";
 
 function parse_cmd(array $argv) : array
 {

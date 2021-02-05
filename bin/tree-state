@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
-require realpath(__DIR__)."/../vendor/autoload.php";
+$root = realpath(__DIR__."/..");
+require "{$root}/vendor/autoload.php";
 
 use Rulatir\Tree\State;
 

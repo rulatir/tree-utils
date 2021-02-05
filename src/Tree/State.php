@@ -4,20 +4,27 @@
 namespace Rulatir\Tree;
 
 
+use Rulatir\Tree\Contracts\FileHashingInterface;
 use Rulatir\Tree\Contracts\GitRepositoryInterface;
 
 final class State
 {
     private GitRepositoryInterface $repository;
+    private FileHashingInterface $hashing;
     private string $baseCommitRef;
     private ?string $baseCommit;
     private ?array $snapshot = null;
 
-    public function __construct(GitRepositoryInterface $repository, string $baseCommitRef)
+    public function __construct(
+        GitRepositoryInterface $repository,
+        string $baseCommitRef,
+        FileHashingInterface $hashing
+    )
     {
         $this->repository = $repository;
         $this->baseCommitRef = $baseCommitRef;
         $this->baseCommit = null;
+        $this->hashing = $hashing;
     }
 
     public function capture() : array
@@ -46,19 +53,18 @@ final class State
     {
         return
             $this->snapshot
-            ?? ($this->snapshot = $this->inRepositoryRoot([$this, 'capture']));
+            ?? ($this->snapshot = $this->repository->inRepositoryRoot([$this, 'capture']));
     }
 
     public function captureBaseCommit() : string
     {
-        $this->assertRepositoryRoot(__METHOD__);
-        return `git rev-parse {$this->getBaseCommitRef()}`;
+        return $this->repository->revParse($this->getBaseCommitRef());
     }
 
     /** @return Change[] */
     public function captureChanges() : array
     {
-        $this->assertRepositoryRoot(__METHOD__);
+        $this->repository->assertRepositoryRoot(__METHOD__);
         $changes = trim(`git diff {$this->getBaseCommit()} --name-status`);
         $additions = trim(`git ls-files --other --exclude-standard`);
         $lines = array_map('rtrim', [
@@ -79,7 +85,7 @@ final class State
     {
         $descriptors = array_map([Change::class,'changeToArray'], $changes);
         foreach($descriptors as $i => $descriptor) {
-            $descriptors[$i]['md5'] = file_exists($descriptor['path']) ? md5_file($descriptor['path']) : 'ABSENT';
+            $descriptors[$i]['md5'] = $this->hashing->hashFile($descriptor['path']);
         }
         return $descriptors;
     }

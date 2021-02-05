@@ -6,6 +6,8 @@ use Rulatir\Tree\State;
 
 $repositoryRoot = rtrim($argv[1], "/\\");
 $baseCommitRef = file_exists("{$repositoryRoot}/.tree-state.ref") ? trim(`cat .tree-state.ref`) : 'HEAD';
-$state = new State($repositoryRoot, $baseCommitRef);
+$repository = new \Rulatir\Tree\GitRepository($repositoryRoot);
+$hashing = new \Rulatir\Tree\MD5FileHashing();
+$state = new State($repository,$baseCommitRef,$hashing);
 $snapshot = $state->getSnapshot();
 echo json_encode($snapshot, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);

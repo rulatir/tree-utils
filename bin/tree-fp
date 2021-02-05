@@ -1,5 +1,9 @@
 #!/usr/bin/env php
 <?php
+
+use Rulatir\Tree\Fingerprint;
+use Rulatir\Tree\GlobFilter;
+
 require __DIR__."/../vendor/autoload.php";
 
 function parse_cmd(array $argv) : array
@@ -22,12 +26,13 @@ function parse_paths(array $argv) : array
     return array_reverse($result);
 }
 
-function tree_fp(string $repositoryRoot, $statefile, array $rules)
+function tree_fp(string $repositoryRoot, $stateFile, array $rules)
 {
-    $fingerprint = new \Rulatir\Tree\Fingerprint($repositoryRoot, $repositoryRoot);
-    foreach ($rules as $rule) {
-        $fingerprint->addRule(...$rule);
+    $filter = new GlobFilter();
+    foreach($rules as $rule) {
+        $filter->addRule(...$rule);
     }
+    $fingerprint = new Fingerprint($repositoryRoot, $stateFile, $filter);
     echo md5(json_encode($fingerprint->getFingerprint(),JSON_PRETTY_PRINT));
 }
 

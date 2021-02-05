@@ -41,4 +41,14 @@ final class GitRepository implements GitRepositoryInterface
         usort($result, [Change::class, 'compare']);
         return $result;
     }
+
+    public function revParse(string $revisionRef): string
+    {
+        return $this->inRepositoryRoot([$this,'revParseInRoot'], $revisionRef);
+    }
+
+    private function revParseInRoot(string $revisionRef): string
+    {
+        return trim(`git rev-parse {$revisionRef}`);
+    }
 }

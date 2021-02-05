@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": ">=7.4",
-        "webmozart/glob": "^4.3"
+        "webmozart/glob": "^4.3",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
@@ -18,12 +19,10 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "test/unit"
-        ],
         "psr-4": {
             "Rulatir\\": [
-                "test/unit/"
+                "test/unit/",
+                "test/stories/"
             ]
         }
     },
@@ -35,6 +34,7 @@
         "phpunit/phpunit": "^9.5",
         "derhasi/tempdirectory": "^0.1.5",
         "symfony/filesystem": "^5.2",
-        "cpliakas/git-wrapper": "^3.1"
+        "cpliakas/git-wrapper": "^3.1",
+        "dg/bypass-finals": "^1.3"
     }
 }

@@ -4,8 +4,8 @@
 namespace Rulatir\Tree;
 
 
+use Rulatir\Tree\Contracts\PathFilterInterface;
 use Rulatir\Tree\Traits\HasGitRepository;
-use Webmozart\Glob\Glob;
 
 final class Fingerprint
 {
@@ -15,29 +15,23 @@ final class Fingerprint
     /** @var MatchRule[] */
     private array $rules = [];
     private ?array $fingerprint = null;
+    private string $repositoryRoot;
+    /**
+     * @var PathFilterInterface
+     */
+    private PathFilterInterface $filter;
 
-    public function __construct(string $repositoryRoot, string $stateFile)
+    public function __construct(string $repositoryRoot, string $stateFile, PathFilterInterface $filter)
     {
         $this->constructHasGitRepository($repositoryRoot);
         $this->stateFile = $stateFile;
+        $this->repositoryRoot = $repositoryRoot;
+        $this->filter = $filter;
     }
 
     public function getStateFile(): string
     {
         return $this->stateFile;
-    }
-
-    /**
-     * @return MatchRule[]
-     */
-    public function getRules(): array
-    {
-        return $this->rules;
-    }
-
-    public function addRule(string $glob, bool $exclude = false)
-    {
-        array_unshift($this->rules, new MatchRule($glob, $exclude));
     }
 
     public function getFingerprint() : array
@@ -59,25 +53,12 @@ final class Fingerprint
         $files = $state['files'];
 
         $result = [];
-        foreach($this->filter($files) as $fileState) {
+        foreach($this->filter->filter($files, fn($fileState) => $fileState['path']) as $fileState) {
             $result[$fileState['path']] = $fileState['md5'];
         }
         return [
             'commit'=>$state['commit'],
             'files'=>$result
         ];
-    }
-
-    public function filter(array $fileStates) : array
-    {
-        if (!count($this->getRules())) return $fileStates;
-        $filtered = [];
-        $keyed = []; foreach($fileStates as $fileState) $keyed[$fileState['path']] = $fileState;
-        foreach($this->getRules() as $rule) {
-            $matched = Glob::filter($keyed, $rule->glob, Glob::FILTER_KEY);
-            $keyed = array_diff_key($keyed, $matched);
-            if (!$rule->exclude) $filtered[] = $matched;
-        }
-        return array_values(array_merge(...$filtered));
     }
 }

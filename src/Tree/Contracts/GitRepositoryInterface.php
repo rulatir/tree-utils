@@ -15,4 +15,6 @@ interface GitRepositoryInterface extends HasGitRepositoryInterface
      * @return Change[]
      */
     public function getChanges(string $baseCommit) : array;
+
+    public function revParse(string $revisionRef) : string;
 }

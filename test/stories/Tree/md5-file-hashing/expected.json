@@ -1,0 +1,5 @@
+{
+    "md5-file-hashing/file1.txt": "d545e199fa0d697a937d18b747698baf",
+    "md5-file-hashing/file2.txt": "b799b8cfc145c5ac4624b061cf65ab99",
+    "md5-file-hashing/absent.txt": "ABSENT"
+}

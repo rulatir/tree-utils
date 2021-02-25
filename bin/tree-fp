@@ -37,8 +37,15 @@ function tree_fp(string $repositoryRoot, $stateFile, array $rules, ?string $debu
         $filter->addRule(...$rule);
     }
     $fingerprint = new Fingerprint($repositoryRoot, $stateFile, $filter);
-    echo md5($fingerprintJSON = json_encode($fingerprint->getFingerprint(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
-    if ($debugFile) file_put_contents($debugFile, $fingerprintJSON);
+    echo md5(json_encode($fingerprintData = $fingerprint->getFingerprint(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+    if ($debugFile) {
+        $fingerprintData['arguments'] = [
+            'repositoryRoot' => $repositoryRoot,
+            'statefile' => $stateFile,
+            'rules' => $rules
+        ];
+        file_put_contents($debugFile, json_encode($fingerprintData, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+    }
 }
 
 tree_fp(...parse_cmd($argv));

@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 for($d=__DIR__;$d!=="/";$d=dirname($d)) if (is_file($f="$d/vendor/autoload.php")) { $g = require $f; break; }
-if (!$g) { echo "Failed to load the autoloader. Complain to Composer authors."; exit(1); }
+if (!$g) { echo "Failed to load the autoloader. Complain to Composer authors for making it difficult."; exit(1); }
 
 use Rulatir\Tree\State;
 

@@ -43,21 +43,6 @@ class FingerprintStory extends TestCase
         }
     }
 
-    protected function fingerprint(
-        string $stateFile,
-        GitRepositoryInterface $repository,
-        FileHashingInterface $hashing,
-        PathFilterInterface $filter
-    ) : array
-    {
-        $state = new State($repository, 'HEAD', $hashing);
-        $snapshot = $state->getSnapshot();
-        $snapshotJSON = json_encode($snapshot,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
-        file_put_contents($stateFile, $snapshotJSON);
-        $fp = new Fingerprint($this->tmpDir->getRoot(), $stateFile, $filter);
-        return $fp->getFingerprint();
-    }
-
     public function changes() : array
     {
         $data = [
@@ -77,6 +62,21 @@ class FingerprintStory extends TestCase
         ];
         return array_combine(array_column($data, 0),$data);
 
+    }
+
+    protected function fingerprint(
+        string $stateFile,
+        GitRepositoryInterface $repository,
+        FileHashingInterface $hashing,
+        PathFilterInterface $filter
+    ) : array
+    {
+        $state = new State($repository, 'HEAD', $hashing);
+        $snapshot = $state->getSnapshot();
+        $snapshotJSON = json_encode($snapshot,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+        file_put_contents($stateFile, $snapshotJSON);
+        $fp = new Fingerprint($this->tmpDir->getRoot(), $stateFile, $filter);
+        return $fp->getFingerprint();
     }
 
     protected function setUp(): void

@@ -44,6 +44,7 @@ function tree_fp(string $repositoryRoot, $stateFile, array $rules, ?string $debu
             'statefile' => $stateFile,
             'rules' => $rules
         ];
+        @mkdir(dirname($debugFile), 0755, true);
         file_put_contents($debugFile, json_encode($fingerprintData, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
     }
 }

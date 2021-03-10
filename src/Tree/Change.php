@@ -36,22 +36,30 @@ final class Change
             throw new InvalidArgumentException("Invalid change line \"{$changeLine}\"");
         };
         [$status, $path] = array_slice($matches, 1);
-        if (strlen($status) > 2) {
+        if (strlen($status) > 4) {
             throw new InvalidArgumentException("Invalid change status field in change line \"{$changeLine}\"");
         }
         switch($status[0]) {
             case "M": return [new self(self::STATUS_MODIFIED, $path)];
             case "D": return [new self(self::STATUS_DELETED, $path)];
             case "R":
+            case "C":
+                if (!preg_match("/^[RC](?:(?:[0-9]*)|(?:[MD]))?$/", $status)) {
+                    throw new InvalidArgumentException("Invalid rename line \"{$changeLine}\"; to and from must be separated by a tab character and there must be exactly two items");
+                }
                 $names = explode("\t", $path);
                 if (2 !== count($names)) {
                     throw new InvalidArgumentException("Invalid rename line \"{$changeLine}\"; to and from must be separated by a tab character and there must be exactly two items");
                 }
                 [$from, $to] = $names;
-                return [
-                    new self(self::STATUS_RENAMED_FROM, $from, $to),
-                    new self(self::STATUS_RENAMED_TO, $to, $from)
-                ];
+                return "C" === $status[0]
+                    ? [
+                        new self(self::STATUS_ADDED, $to)
+                    ]
+                    : [
+                        new self(self::STATUS_RENAMED_FROM, $from, $to),
+                        new self(self::STATUS_RENAMED_TO, $to, $from)
+                    ];
             case "A":
                 return [new self(self::STATUS_ADDED, $path)];
             default:

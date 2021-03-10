@@ -34,6 +34,16 @@ class ChangeTest extends TestCase
                 "RD foo/bar.txt\tfoo/gen/lou.txt",
                 [Change::STATUS_RENAMED_FROM, Change::STATUS_RENAMED_TO],
                 ["foo/bar.txt", "foo/gen/lou.txt"], ["foo/gen/lou.txt", "foo/bar.txt"]
+            ],
+            [
+                "R100  foo/bar.txt\tfoo/gen/lou.txt",
+                [CHANGE::STATUS_RENAMED_FROM, Change::STATUS_RENAMED_TO],
+                ["foo/bar.txt", "foo/gen/lou.txt"], ["foo/gen/lou.txt", "foo/bar.txt"]
+            ],
+            [
+                "C100  foo/bar.txt\tfoo/gen/lou.txt",
+                [CHANGE::STATUS_ADDED],
+                ["foo/gen/lou.txt"], [null]
             ]
         ];
     }
@@ -72,7 +82,7 @@ class ChangeTest extends TestCase
             ["wrong wrong"],
             ["R foo.txt"],
             ["R foo.txt bar.txt"],
-            ["R foo.txt\tbar.txt\tbaz.txt"]
+            ["R foo.txt\tbar.txt\tbaz.txt"],
         ];
     }
 

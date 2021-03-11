@@ -9,23 +9,29 @@ use Rulatir\Tree\GlobFilter;
 function parse_cmd(array $argv) : array
 {
     array_shift($argv);
-    if ("--debug"===$argv[0]) {
-        array_shift($argv);
-        $debugFile = array_shift($argv);
+    while('--'===substr($argv[0],0,2)) {
+        switch($opt = array_shift($argv)) {
+            case "--debug":
+                $debugFile = array_shift($argv);
+                break;
+            case "--rule-prefix":
+                $rulePrefix = array_shift($argv);
+                break;
+        }
     }
     $repositoryRoot = array_shift($argv);
     $statefile = array_shift($argv);
-    $paths = parse_paths($argv);
+    $paths = parse_paths($argv, $rulePrefix?? null);
     return [$repositoryRoot, $statefile, $paths, $debugFile ?? null];
 }
 
-function parse_paths(array $argv) : array
+function parse_paths(array $argv, ?string $rulePrefix) : array
 {
     $result = [];
     while(count($argv)) {
-
-        $path = trim(array_shift($argv));
-        $result[] = '-n' === $path ? [array_shift($argv),true] : [$path,false];
+        if ($exclude = '-n' === $path = trim(array_shift($argv))) $path = trim(array_shift($argv));
+        if ($rulePrefix) $path = trim($rulePrefix,"/")."/".ltrim($path,"/");
+        $result[] = [$path, $exclude];
     }
     return array_reverse($result);
 }

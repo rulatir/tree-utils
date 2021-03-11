@@ -32,11 +32,11 @@ class GlobFilter implements PathFilterInterface
 
     public function filter(array $items, ?callable $obtainPath = null): array
     {
+        $obtainPath = $obtainPath ?? fn($v) => $v;
         if (!count($this->getRules())) return $items;
         $filtered = [];
         $keyed = [];
-        if  ($obtainPath) foreach($items as $item) $keyed['/'.ltrim($obtainPath($item),'/')] = $item;
-        else foreach($items as $item) $keyed['/'.ltrim($item,'/')] = $item;
+        foreach($items as $item) $keyed['/'.ltrim($obtainPath($item),'/')] = $item;
         foreach($this->getRules() as $rule) {
             $matched = Glob::filter($keyed, '/'.ltrim($rule->glob,'/'), Glob::FILTER_KEY);
             $keyed = array_diff_key($keyed, $matched);

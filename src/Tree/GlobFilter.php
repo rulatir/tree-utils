@@ -6,6 +6,7 @@ namespace Rulatir\Tree;
 
 use Rulatir\Tree\Contracts\PathFilterInterface;
 use Webmozart\Glob\Glob;
+use Webmozart\PathUtil\Path;
 
 class GlobFilter implements PathFilterInterface
 {
@@ -38,7 +39,7 @@ class GlobFilter implements PathFilterInterface
         $keyed = [];
         foreach($items as $item) $keyed['/'.ltrim($obtainPath($item),'/')] = $item;
         foreach($this->getRules() as $rule) {
-            $matched = Glob::filter($keyed, '/'.ltrim($rule->glob,'/'), Glob::FILTER_KEY);
+            $matched = Glob::filter($keyed, '/'.ltrim(Path::canonicalize($rule->glob),'/'), Glob::FILTER_KEY);
             $keyed = array_diff_key($keyed, $matched);
             if (!$rule->exclude) $filtered[] = $matched;
         }

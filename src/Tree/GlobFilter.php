@@ -6,7 +6,7 @@ namespace Rulatir\Tree;
 
 use Rulatir\Tree\Contracts\PathFilterInterface;
 use Webmozart\Glob\Glob;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class GlobFilter implements PathFilterInterface
 {
